@@ -1,0 +1,52 @@
+
+from random import randint
+class Power:
+    def __init__(self,name,active=True):
+        self.name = name
+        self.active = True
+class Superhero:
+    def __init__(self, name, skill_list):
+        self.name = name
+        self.skill_list = skill_list
+
+    def usePower(self,this_skill=None):
+        if this_skill==None:
+            this_skill=randint(0,len(self.skill_list)-1)
+        if self.skill_list[this_skill].active == True:
+            print (self.name,'использует',self.skill_list[this_skill].name)
+        else:
+            print('Невозможно использовать',self.skill_list[this_skill].name,'- способность заблокирована!')
+    def getKryptonite(self,this_skill=None):
+        if this_skill==None:
+            this_skill=randint(0,len(self.skill_list)-1)
+        self.skill_list[this_skill].active = False
+        print(self.skill_list[this_skill].name,'- способность заблокирована!')
+    def getPowerStatus(self):
+        for i in self.skill_list:
+            print (i.name,i.active)
+
+    def purify(self):
+        for i in self.skill_list:
+            i.active=True
+
+
+
+def main():
+    laser = Power('Лазер')
+    freeze = Power('Заморозка')
+    fly = Power('Полёт')
+    superpower = Power('Сверхсила')
+    superman = Superhero(name='Кал-Эл',skill_list=[laser,freeze,fly,superpower])
+    superman.usePower(1)
+    superman.getKryptonite(1)
+    superman.getKryptonite()
+    superman.getPowerStatus()
+    superman.usePower(1)
+    superman.purify()
+    superman.getPowerStatus()
+
+
+
+
+if __name__ == '__main__':
+    main()
